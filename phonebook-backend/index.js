@@ -30,6 +30,16 @@ app.get('/', (request, response) => {
   response.send('<h1>Phonebook Application</h1>')
 })
 
+app.get('/info', (request, response) => {
+  const phonebookSize = phonebook.length
+  const today = new Date()
+  response.send(`
+    <h1>Phonebook Info</h1>
+    <p>Phonebook has info for ${phonebookSize} people</p>
+    <p>${today}</p>
+  `)
+})
+
 app.get('/api/persons', (request, response) => {
   response.json(phonebook)
 })
