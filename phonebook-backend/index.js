@@ -44,6 +44,33 @@ app.get('/api/persons', (request, response) => {
   response.json(phonebook)
 })
 
+app.post('/api/persons', (request, response) => {
+  const body = request.body
+  const name = body.name
+  const number = body.number
+
+  if (!name) {
+    return response.status(400).json({
+      error: 'Name is missing'
+    })
+  }
+
+  if (!number) {
+    return response.status(400).json({
+      error: 'Number is missing'
+    })
+  }
+
+  const person = {
+    name: name,
+    number: number,
+    id: Math.floor(Math.random() * 1000000)
+  }
+
+  phonebook = phonebook.concat(person)
+  response.json(phonebook)
+})
+
 app.get('/api/persons/:id', (request, response) => {
   const id = Number(request.params.id)
   const person = phonebook.find(person => person.id === id)
